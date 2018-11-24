@@ -8,35 +8,39 @@ class StudentModel extends CI_Model{
         $this->load->database();
     }
 
-    public function get_student(){
+    public function get_student($id = false){
+    if($id == false){
+        $query = $this->db->get('student');
+        return $query->result();
+    }
 
-        
+    $query = $this->db->get_where('student', array('id' => $id));
+    return $query->row_array();
     }
 
     public function insert_student(){
 
         $data = array(
             'name' => $this->input->post('name'),
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+            'phone' => $this->input->post('phone')
 
         );
 
-        return $this->db->insert('students', $data);
+        return $this->db->insert('student', $data);
     }
 
     public function update_student($id){
 
-        $data=array(
-            'title' => $this->input->post('title'),
-            'description'=> $this->input->post('description')
-        );
+        $data = array(
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'phone' => $this->input->post('phone')
 
-        if($id == 0){
-            return $this->db->insert('students', $data);
-        } else {
+        );
+        
             $this->db->where('id', $id);
-            return $this->db->update('students', $data);
-        }
+            return $this->db->update('student', $data);
     }
 
 }

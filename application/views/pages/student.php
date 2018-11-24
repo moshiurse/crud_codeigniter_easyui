@@ -7,15 +7,14 @@
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+
 </head>
 <body>
     <h2>Basic CRUD Application</h2>
     <p>Click the buttons on datagrid toolbar to do crud actions.</p>
     
     <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
-            url="get_users.php"
+            url="crud/index.php/student/show"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
@@ -25,6 +24,13 @@
                 <th field="email" width="50">Email</th>
             </tr>
         </thead>
+        <?php foreach ($students as $student): ?>
+            <tr>
+                <td field="name" width="50"> <?php echo $student->name; ?></td>
+                <td field="phone" width="50"><?php echo $student->email; ?></td>
+                <td field="email" width="50"><?php echo $student->phone; ?></td>
+            </tr>
+            <?php endforeach; ?>
     </table>
     <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
@@ -36,7 +42,7 @@
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>User Information</h3>
             <div style="margin-bottom:10px">
-                <input name="Name" class="easyui-textbox" required="true" label="Name:" style="width:100%">
+                <input name="name" class="easyui-textbox" required="true" label="Name:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
                 <input name="phone" class="easyui-textbox" required="true" label="Phone:" style="width:100%">
@@ -67,7 +73,7 @@
         }
         function saveUser(){
             $('#fm').form('submit',{
-                url: url,
+                url: url,      
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
@@ -107,3 +113,6 @@
     </script>
 </body>
 </html>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>

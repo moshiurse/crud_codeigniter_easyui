@@ -9,19 +9,13 @@ function __construct(){
 }
 
 public function index()
-{
-$this->load->view("pages/student");
-}
+    {
+        $data['students'] = $this->StudentModel->get_student();
 
-public function getStudents()
-	{
-		$this->output->set_content_type('application/json');
-		$student = $this->StudentModel->get_student();
-		echo json_encode($student);
+        $this->load->view("pages/student", $data);
     }
-    
 
-public function saveStudent()
+public function save()
 {
     $input = $this->StudentModel->insert_student();
     if ($input) {
@@ -31,7 +25,7 @@ public function saveStudent()
     }
 }
 
-public function updateStudent($id)
+public function update($id)
 	{
 		$input = $this->studentModel->updateStudent($id);
 		if ($input) {
@@ -41,7 +35,7 @@ public function updateStudent($id)
 		}
 	}
 
-public function deleteStudent()
+public function delete()
 {
     $id = intval($_REQUEST['id']);
     $input = $this->studentModel->deleteStudent($id);

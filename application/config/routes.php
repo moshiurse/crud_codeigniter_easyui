@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['students'] = 'students';
-$route['students/create'] = 'students/create';
+$route['students/save'] = 'students/save';
  
 $route['students/edit/(:any)'] = 'students/edit/$1';
 $route['students/view/(:any)'] = 'students/view/$1';

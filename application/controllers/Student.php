@@ -15,35 +15,36 @@ public function index()
         $this->load->view("pages/student", $data);
     }
 
+    public function employee()
+    {
+        $data['students'] = $this->StudentModel->get_student();
+
+        $this->load->view("pages/employee", $data);
+    }
+
+    function show(){
+        $data = $this->StudentModel->get_student();
+        echo json_encode($data);
+    }
+
 public function save()
 {
-    $input = $this->StudentModel->insert_student();
-    if ($input) {
-        echo json_encode(['success' => true]);
-    }else {
-        echo json_encode(['Msg'=>'Some Error occured!.']);
-    }
+    $this->StudentModel->insert_student();
+    $this->load->view('pages/student');
+
 }
 
 public function update($id)
 	{
-		$input = $this->studentModel->updateStudent($id);
-		if ($input) {
-			echo json_encode(['success' => true]);
-		}else {
-			echo json_encode(['Msg'=>'Some Error occured!.']);
-		}
+		$this->StudentModel->update_student($id);
+		$this->load->view('pages/student');
 	}
 
-public function delete()
+public function delete($id)
 {
-    $id = intval($_REQUEST['id']);
-    $input = $this->studentModel->deleteStudent($id);
-    if ($input) {
-        echo json_encode(array('success'=>true));
-    }else {
-        echo json_encode(array('errorMsg'=>'Some errors occured.'));
-    }
+    // // $id = intval($_REQUEST['id']);
+    // $this->studentModel->delete_student($id);
+    // redirect("pages/student/")
 }
 
 }

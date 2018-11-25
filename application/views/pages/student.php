@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
     <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 
 </head>
 <body>
@@ -14,23 +17,17 @@
     <p>Click the buttons on datagrid toolbar to do crud actions.</p>
     
     <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
-            url="crud/index.php/student/show"
+            url="<?php echo base_url('student/show'); ?>"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
             <tr>
                 <th field="name" width="50">Name</th>
-                <th field="phone" width="50">Phone</th>
-                <th field="email" width="50">Email</th>
+                <th field="email" width="50">Phone</th>
+                <th field="phone" width="50">Email</th>
             </tr>
         </thead>
-        <?php foreach ($students as $student): ?>
-            <tr>
-                <td field="name" width="50"> <?php echo $student->name; ?></td>
-                <td field="phone" width="50"><?php echo $student->email; ?></td>
-                <td field="email" width="50"><?php echo $student->phone; ?></td>
-            </tr>
-            <?php endforeach; ?>
+        
     </table>
     <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
@@ -68,12 +65,12 @@
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Edit User');
                 $('#fm').form('load',row);
-                url = 'update_user.php?id='+row.id;
+                url = "<?php echo base_url('student/update/');?>"+row.id;
             }
         }
         function saveUser(){
             $('#fm').form('submit',{
-                url: url,      
+                url: "<?php echo base_url('student/save'); ?>",
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
@@ -85,8 +82,8 @@
                             msg: result.errorMsg
                         });
                     } else {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
+                        $('#dlg').dialog('close');
+                        $('#dg').datagrid('reload');
                     }
                 }
             });
@@ -96,7 +93,7 @@
             if (row){
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('destroy_user.php',{id:row.id},function(result){
+                        $.post('',{id:row.id},function(result){
                             if (result.success){
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
@@ -113,6 +110,3 @@
     </script>
 </body>
 </html>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>

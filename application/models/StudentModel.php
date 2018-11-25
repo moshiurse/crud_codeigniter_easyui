@@ -24,7 +24,6 @@ class StudentModel extends CI_Model{
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
             'phone' => $this->input->post('phone')
-
         );
 
         return $this->db->insert('student', $data);
@@ -41,6 +40,12 @@ class StudentModel extends CI_Model{
         
             $this->db->where('id', $id);
             return $this->db->update('student', $data);
+    }
+
+    public function delete_student($id){
+
+        $this->db->where('id', $id);
+        $this->db->delete();
     }
 
 }

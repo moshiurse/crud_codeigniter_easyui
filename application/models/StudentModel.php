@@ -9,9 +9,15 @@ class StudentModel extends CI_Model{
     }
 
     public function get_student($id = false){
+
     if($id == false){
-        $query = $this->db->get('student');
-        return $query->result();
+        $page = isset($_POST['page']) ? intval($_POST['rows'])*(intval($_POST['page'])-1) :1;
+        $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+        $result['total'] = $this->db->count_all("student");
+        $this->db->limit($rows,$page);
+        $query = $this->db->query("select * from student limit $page,$rows");
+        $result['rows'] = $query->result();
+        return $result;
     }
 
     $query = $this->db->get_where('student', array('id' => $id));

@@ -16,7 +16,7 @@
     <h2>Basic CRUD Application</h2>
     <p>Click the buttons on datagrid toolbar to do crud actions.</p>
     
-    <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
+    <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:auto;"
             url="<?php echo base_url('student/show'); ?>"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">

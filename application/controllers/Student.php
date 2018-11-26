@@ -29,22 +29,39 @@ public function index()
 
 public function save()
 {
-    $this->StudentModel->insert_student();
-    $this->load->view('pages/student');
+    $id = $this->input->post('id');
+    if($id == NULL){
+        $query = $this->StudentModel->insert_student();
 
+        if($query){
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('errorMsg' => 'error occured'));
+        }
+    }
+    else{
+        $query = $this->StudentModel->update_student($id);
+
+        if($query){
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('errorMsg' => 'error occured'));
+        }
+    }
+    
 }
 
-public function update($id)
-	{
-		$this->StudentModel->update_student($id);
-		$this->load->view('pages/student');
-	}
-
-public function delete($id)
+public function delete()
 {
-    // // $id = intval($_REQUEST['id']);
-    // $this->studentModel->delete_student($id);
-    // redirect("pages/student/")
+    $id = $this->input->post('id');
+    $query = $this->StudentModel->delete_student($id);
+
+    if($query){
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('errorMsg' => 'error occured'));
+    }
+
 }
 
 }

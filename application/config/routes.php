@@ -53,9 +53,8 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['students'] = 'students';
-$route['students/save'] = 'students/save';
- 
-$route['students/edit/(:any)'] = 'students/edit/$1';
-$route['students/view/(:any)'] = 'students/view/$1';
-$route['fastudents/(:any)'] = 'students/view/$1';
+// $route['students'] = 'students';
+// $route['students/save'] = 'students/save'; 
+// $route['students/edit/(:any)'] = 'students/edit/$1';
+// $route['students/view/(:any)'] = 'students/view/$1';
+// $route['fastudents/(:any)'] = 'students/view/$1';

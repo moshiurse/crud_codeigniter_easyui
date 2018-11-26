@@ -47,6 +47,9 @@
             <div style="margin-bottom:10px">
                 <input name="email" class="easyui-textbox" required="true" validType="email" label="Email:" style="width:100%">
             </div>
+            <div style="margin-bottom:10px">
+                <input name="id" class="easyui-textbox" type="hidden" style="width:100%">
+            </div>
         </form>
     </div>
     <div id="dlg-buttons">
@@ -58,14 +61,14 @@
         function newUser(){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','New User');
             $('#fm').form('clear');
-            url = 'save_user.php';
+            url = "<?php echo base_url('student/save'); ?>";
         }
         function editUser(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Edit User');
                 $('#fm').form('load',row);
-                url = "<?php echo base_url('student/update/');?>"+row.id;
+                url = ""+row.id;
             }
         }
         function saveUser(){
@@ -93,7 +96,7 @@
             if (row){
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('',{id:row.id},function(result){
+                        $.post('student/delete',{id:row.id},function(result){
                             if (result.success){
                                 $('#dg').datagrid('reload');    // reload the user data
                             } else {
